@@ -67,11 +67,11 @@ class Kube(Plugin):
                                                   namespace=self.namespace)
         return data.data
 
-    def get_data(self, doc):
+    def get_manifest_data(self, doc):
         for match in nested_lookup("data", doc):
             self.env_dict.update(match)
 
-    def get_env(self, doc):
+    def get_manifest_env(self, doc):
         for match in nested_lookup("env", doc):
             for m in match:
                 try:
@@ -79,7 +79,7 @@ class Kube(Plugin):
                 except KeyError:
                     pass
 
-    def get_envfrom(self, doc, resource, resource_key):
+    def get_manifest_envfrom(self, doc, resource, resource_key):
         for match in nested_lookup(resource_key, doc):
             try:
                 data = self.ressource_funct_dict[resource](match["name"])
@@ -87,7 +87,7 @@ class Kube(Plugin):
             except KeyError:
                 pass
 
-    def get_valuefrom(self, doc, resource, resource_key):
+    def get_manifest_valuefrom(self, doc, resource, resource_key):
         for match in nested_lookup(resource_key, doc):
             try:
                 data = self.ressource_funct_dict[resource](match["name"])
@@ -98,12 +98,12 @@ class Kube(Plugin):
     def get_manifests(self):
         self.env_dict = {}
         for doc in get_documents(realpath(self.name)):
-            self.get_data(doc)
-            self.get_env(doc)
-            self.get_envfrom(doc, "ConfigMap", "configMapRef")
-            self.get_envfrom(doc, "secrets", "secretRef")
-            self.get_valuefrom(doc, "ConfigMap", "configMapKeyRef")
-            self.get_valuefrom(doc, "secrets", "secretKeyRef")
+            self.get_manifest_data(doc)
+            self.get_manifest_env(doc)
+            self.get_manifest_envfrom(doc, "ConfigMap", "configMapRef")
+            self.get_manifest_envfrom(doc, "secrets", "secretRef")
+            self.get_manifest_valuefrom(doc, "ConfigMap", "configMapKeyRef")
+            self.get_manifest_valuefrom(doc, "secrets", "secretKeyRef")
         return self.env_dict
 
     def process(self):

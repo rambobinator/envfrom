@@ -7,15 +7,15 @@ from nested_lookup import nested_lookup
 from .tools import Plugin, register_plugin
 
 
-def get_documents(path, documents=None):
+def get_yaml_documents(path, documents=None):
     if documents is None:
         documents = []
-    if isfile(path):
+    if isfile(path) and path.endswith((".yaml", ".yml")):
         with open(path, newline=None) as f:
             documents.extend(yaml.safe_load_all(f))
     if isdir(path):
         for e in listdir(path):
-            get_documents(path + "/" + e, documents)
+            get_yaml_documents(path + "/" + e, documents)
     return documents
 
 
@@ -97,7 +97,7 @@ class Kube(Plugin):
 
     def get_manifests(self):
         self.env_dict = {}
-        for doc in get_documents(realpath(self.name)):
+        for doc in get_yaml_documents(realpath(self.name)):
             self.get_manifest_data(doc)
             self.get_manifest_env(doc)
             self.get_manifest_envfrom(doc, "ConfigMap", "configMapRef")

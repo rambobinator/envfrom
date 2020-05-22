@@ -1,0 +1,92 @@
+
+---
+kind: ConfigMap
+data:
+  CONFIGMAP_KEY_FOO: configmap-value-foo
+  CONFIGMAP_KEY_BAR: configmap-value-bar
+
+---
+kind: CronJob
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cronjob-container-foo
+            env:
+            - name: CRONJOB_KEY_FOO
+              value: cronjob-value-foo
+            # - name: WWW
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: CRONJOB_NAME_FROM_FOO
+            #       key: CRONJOB_KEY_FROM_FOO
+            - name: CRONJOB_KEY_BAR
+              value: cronjob-value-bar
+            # envFrom:
+            # - configMapRef:
+            #     name: cronjob-configmap-foo
+            # - secretRef:
+            #     name: cronjob-secret-foo
+          - name: cronjob-container-bar
+            env:
+            - name: CRONJOB_KEY_BAZ
+              value: cronjob-value-baz
+            # - name: XXX
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: CRONJOB_NAME_FROM_BAR
+            #       key: CRONJOB_KEY_FROM_BAR
+            - name: CRONJOB_KEY_QUX
+              value: cronjob-value-qux
+            # envFrom:
+            # - configMapRef:
+            #     name: cronjob-configmap-bar
+            # - secretRef:
+            #     name: cronjob-secret-bar
+
+---
+kind: Deployment
+spec:
+  template:
+    spec:
+      containers:
+      - name: deployment-container-foo
+        env:
+        - name: DEPLOYMENT_KEY_FOO
+          value: deployment-value-foo
+        # - name: YYY
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: DEPLOYMENT_NAME_FROM_FOO
+        #       key: DEPLOYMENT_KEY_FROM_FOO
+        - name: DEPLOYMENT_KEY_BAR
+          value: deployment-value-bar
+        # envFrom:
+        # - configMapRef:
+        #     name: deployment-configmap-foo
+        # - secretRef:
+        #     name: deployment-secret-foo
+      - name: deployment-container-bar
+        env:
+        - name: DEPLOYMENT_KEY_BAZ
+          value: deployment-value-baz
+        # - name: ZZZ
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: DEPLOYMENT_NAME_FROM_BAR
+        #       key: DEPLOYMENT_KEY_FROM_BAR
+        - name: DEPLOYMENT_KEY_QUX
+          value: deployment-value-qux
+        # envFrom:
+        # - configMapRef:
+        #     name: deployment-configmap-bar
+        # - secretRef:
+        #     name: deployment-secret-bar
+
+---
+kind: Secret
+data:
+  SECRET_KEY_FOO: secret-value-foo
+  SECRET_KEY_BAR: secret-value-bar

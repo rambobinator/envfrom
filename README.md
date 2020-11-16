@@ -8,16 +8,17 @@ But what about running this app locally with those same variables ? envfrom meet
 
 ### Usage
 
-    usage: envfrom [-h] {cli,dir,kube} ... child
+    usage: envfrom [-h] {cli,dir,kube,vault} ... child
     
 	Call child process with custom environment
 	
 	positional arguments:
-	  {cli,dir,kube}  env source
-	    cli           Dict values: FOO=BAR BAR=FOO
-	    dir           Set environment according to files in a specified path
-	    kube          Mirror specified kubernetes ressource volume keys (decoded)
-	  child           child process
+	  {cli,dir,kube,vault}  env source
+	    cli                 Dict values: FOO=BAR BAR=FOO
+	    dir                 Set environment according to files in a specified path
+	    kube                Mirror specified kubernetes ressource volume keys (decoded)
+	    vault               Fetch secrets from Vault paths
+	  child                 child process
 
 	optional arguments:
 	  -h, --help      show this help message and exit

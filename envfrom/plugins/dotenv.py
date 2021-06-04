@@ -10,8 +10,8 @@ def get_dotenv(path):
             if l.startswith('#'):
                 continue
             try:
-                k, v = l[:-1].split('=')
-                env_dict.update({k: v})
+                i = l[:-1].index('=')
+                env_dict.update({l[:i]: l[(i + 1):-1]})
             except ValueError:
                 pass
     return env_dict

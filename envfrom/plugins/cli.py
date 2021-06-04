@@ -19,8 +19,8 @@ class CLI(Plugin):
         env_dict = {}
         for env in self.env_list:
             try:
-                k, v = env.split('=')
-                env_dict[k] = v
+                i = env.index('=')
+                env_dict[env[:i]] = env[(i + 1):-1]
             except ValueError:
                 pass
         return env_dict

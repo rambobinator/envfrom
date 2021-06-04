@@ -1,1 +1,1 @@
-__all__ = ["cli", "dir", "kube", "vault"]
+__all__ = ["cli", "dir", "dotenv", "kube", "vault"]

@@ -8,21 +8,23 @@ But what about running this app locally with those same variables ? envfrom meet
 
 ### Usage
 
-    usage: envfrom [-h] {cli,dir,kube} ... child
-    
-	Call child process with custom environment
-	
-	positional arguments:
-	  {cli,dir,kube}  env source
-	    cli           Dict values: FOO=BAR BAR=FOO
-	    dir           Set environment according to files in a specified path
-	    kube          Mirror specified kubernetes ressource volume keys (decoded)
-	  child           child process
+    usage: -m [-h] {cli,dir,dotenv,kube} ... child
 
-	optional arguments:
-	  -h, --help      show this help message and exit
+    Call child process with custom environment
 
-### Example
+    positional arguments:
+        {cli,dir,dotenv,kube}
+                            env source
+        cli                 Dict values: FOO=BAR BAR=FOO
+        dir                 Set environment according to files in a specified path
+        dotenv              Set environment according to .env file
+        kube                Mirror specified kubernetes ressource volume keys (decoded)
+        child                 child process
+
+    optional arguments:
+        -h, --help            show this help message and exit
+
+### Kubernetes secrets example
 Assuming that you already have the following secret created on your default namespace :
 
     

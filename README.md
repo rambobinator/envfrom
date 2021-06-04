@@ -17,7 +17,7 @@ But what about running this app locally with those same variables ? envfrom meet
 	  {cli,dir,kube,vault}  env source
 	    cli                 Dict values: FOO=BAR BAR=FOO
 	    dir                 Set environment according to files in a specified path
-      dotenv              Set environment according to .env file
+            dotenv              Set environment according to .env file
 	    kube                Mirror specified kubernetes ressource volume keys (decoded)
 	    vault               Fetch secrets from Vault paths
 	  child                 child process

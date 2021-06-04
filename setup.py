@@ -25,8 +25,9 @@ setup(
         ]
     },
     install_requires=[
-        "kubernetes==10.0.1",
-        "requests==2.23.0"
+        "kubernetes>=10.0.1",
+        "requests>=2.23.0",
+        "nested-lookup>=0.2.21"
     ],
     license="MIT"
 )

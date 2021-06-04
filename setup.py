@@ -9,7 +9,7 @@ setup(
     description="Call child process with custom environment",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    version="0.0.1",
+    version="0.2.0",
     author="rm_ass",
     author_email="contact@romanmasse.com",
     packages=find_packages(),

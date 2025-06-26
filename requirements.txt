@@ -3,7 +3,7 @@ certifi==2022.12.7
 chardet==3.0.4
 google-auth==1.11.2
 hvac==0.10.14
-idna==2.9
+idna==3.7
 kubernetes==10.0.1
 nested-lookup==0.2.21
 oauthlib==3.1.0
